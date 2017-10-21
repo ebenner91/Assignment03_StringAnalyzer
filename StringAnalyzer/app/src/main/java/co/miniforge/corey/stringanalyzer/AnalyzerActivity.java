@@ -1,7 +1,9 @@
 package co.miniforge.corey.stringanalyzer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,8 @@ public class AnalyzerActivity extends AppCompatActivity {
 
         locateViews();
 
+        setClickListener();
+
         bindData();
     }
 
@@ -67,5 +71,15 @@ public class AnalyzerActivity extends AppCompatActivity {
         specialCharactersCount.setText(String.format(Locale.getDefault(), "Special Characters: %d", textUtil.getSpecialCharacterCount()));
         uniqueWords.setText(String.format(Locale.getDefault(), "Unique Words: %d", textUtil.getUniqueWords()));
         longestWord.setText(String.format(Locale.getDefault(), "Longest Word: %s", textUtil.getLongestWord()));
+    }
+
+    void setClickListener() {
+        backToInputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), InputActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
