@@ -1,0 +1,55 @@
+Bug #1:
+Description of the issue: "App crashes when you hit submit"
+
+Repro steps: Opened app, clicked submit button with no message entered in input and the app crashed. Tried gain with a message in input and the app crashed once again.
+
+System information: Reproduced the bug on Android Emulator with a Nexus 5X
+
+Location of bug in the code: The destination of the Intent in the InputActivity was directed to the TextAnalyzerUtil class, which is not an activity class, causing the app to crash. Fixed by directing the Intent to the AnalyzerActivity.
+
+What is the impact of changes to this file? Does changing this file break other ones?: Changing the file fixed the bug and stopped the app from crashing on submit. The change does not appear to have broken any other files in the app.
+
+Date/Time of the fix & commit link: 10/21/17 12:37am
+https://github.com/ebenner91/Assignment03_StringAnalyzer/commit/e9e3bdc45d14a1a564e9d5b91ad7f5fe58c4e9c2
+
+
+Bug #2:
+Description of the issue: "You can submit an empty message"
+
+Repro steps: Opened the app and clicked the submit button without typing in the input box. The app progressed to the next activity with no error, despite the lack of input.
+
+System information: Reproduced the bug on Android Emulator with a Nexus 5X
+
+Location of bug in the code: InputActivity has no input validation to check for input before submitting. Fixed by adding input validation to check if the user entered anything in the textEdit. If not, the app will display a toast asking for input.
+
+What is the impact of changes to this file? Does changing this file break other ones?: Adding input validation prevented the user from proceeding to the next activity without entering something into the input. Did not break any other files.
+
+Date/Time of the fix & commit link: 10/21/17 1:08am https://github.com/ebenner91/Assignment03_StringAnalyzer/commit/2a5ea17a3359e13bb7217ec7468859452ad48507
+
+
+Bug #3
+Description of the issue: "Some of the metrics are not updating with new data"
+
+Repro steps: Opened the app, entered text, and observed that two of the metrics (Unique words and longest word) were not being displayed, the designated lines for these metrics were showing as the default "TextView"
+
+System information: Reproduced the bug on Android Emulator with a Nexus 5X
+ 
+Location of bug in the code: In the Analyzer activity, in the BindData method, setText is called on all but the above mentioned textViews, so the textViews are not being updated with their metrics.
+
+What is the impact of changes to this file? Does changing this file break other ones?: Initially, I failed to recognize that getLongestWord returns a string while the other methods return numbers, so I formatted the setText with a %d, which caused the app to crash. Upon recognizing my error, I changes the format to %s and the app ran as intended, displaying the desired metrics.
+
+Date/Time of the fix & commit link: 10/21/17 2:19am https://github.com/ebenner91/Assignment03_StringAnalyzer/commit/53b6c8b6aa3c3db53ba4b48753e43b1baa0e5817
+
+
+Bug #4
+Description of the issue: "Analyze another string button doesn’t take you back to the first screen"
+
+Repro steps: Opened the app, submitted a string to proceed to the analyzer activity, then clicked the "Analyze Another String" button. As described above, the button did not take me back to the first activity.
+
+System information: Reproduced the bug on Android Emulator with a Nexus 5X
+
+Location of bug in the code: In the analyzer activity, there is no click listener or intent to take the user back to the first activity, so the button is not programmed to do anything.
+
+What is the impact of changes to this file? Does changing this file break other ones?: By adding a cicklistener and an intent, I was able to get the button to perform as desired, on clicking the button, the user is now directed back to the first activity. Nothing appears to have broken.
+
+Date/Time of the fix & commit link: 10/21/17 2:33am https://github.com/ebenner91/Assignment03_StringAnalyzer/commit/8085351550cb6d474ce70594049c16cf4a296e76
