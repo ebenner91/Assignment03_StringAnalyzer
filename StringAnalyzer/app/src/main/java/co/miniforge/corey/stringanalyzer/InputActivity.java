@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class InputActivity extends AppCompatActivity {
     public static String intentTag = "inputData";
@@ -32,10 +33,18 @@ public class InputActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AnalyzerActivity.class);
-                intent.putExtra(intentTag, input.getText().toString());
-                startActivity(intent);
+                if(!input.getText().toString().equals("")) {
+                    Intent intent = new Intent(getApplicationContext(), AnalyzerActivity.class);
+                    intent.putExtra(intentTag, input.getText().toString());
+                    startActivity(intent);
+                } else if(input.getText().toString().equals("")) {
+                    errorToast();
+                }
             }
         });
+    }
+
+    void errorToast() {
+        Toast.makeText(this, "Error, please enter something!", Toast.LENGTH_SHORT).show();
     }
 }
