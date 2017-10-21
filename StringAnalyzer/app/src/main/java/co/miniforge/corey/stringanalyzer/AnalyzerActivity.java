@@ -6,6 +6,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 
 public class AnalyzerActivity extends AppCompatActivity {
 
@@ -59,9 +61,11 @@ public class AnalyzerActivity extends AppCompatActivity {
     void bindData(){
         messageTextView.setText(message);
 
-        characterCount.setText(String.format("Character Count: %d", textUtil.getTextCharacterCount()));
-        wordCount.setText(String.format("Word Count: %d", textUtil.getWordCount()));
-        uniqueCharacters.setText(String.format("Unique Characters: %d", textUtil.getUniqueCharacters()));
-        specialCharactersCount.setText(String.format("Special Characters: %d", textUtil.getSpecialCharacterCount()));
+        characterCount.setText(String.format(Locale.getDefault(), "Character Count: %d", textUtil.getTextCharacterCount()));
+        wordCount.setText(String.format(Locale.getDefault(), "Word Count: %d", textUtil.getWordCount()));
+        uniqueCharacters.setText(String.format(Locale.getDefault(), "Unique Characters: %d", textUtil.getUniqueCharacters()));
+        specialCharactersCount.setText(String.format(Locale.getDefault(), "Special Characters: %d", textUtil.getSpecialCharacterCount()));
+        uniqueWords.setText(String.format(Locale.getDefault(), "Unique Words: %d", textUtil.getUniqueWords()));
+        longestWord.setText(String.format(Locale.getDefault(), "Longest Word: %s", textUtil.getLongestWord()));
     }
 }
